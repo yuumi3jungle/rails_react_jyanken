@@ -15,3 +15,8 @@
 /log/*
 !/log/.keep
 /tmp
+
+# frontend
+/public/js/*
+!/public/js/.keep
+/frontend/node_modules/
