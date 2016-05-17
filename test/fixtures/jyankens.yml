@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  human: 1
+  computer: 1
+  judgment: 1
+
+two:
+  human: 1
+  computer: 1
+  judgment: 1

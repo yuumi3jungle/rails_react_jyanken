@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Human:</strong>
+  <%= @jyanken.human %>
+</p>
+
+<p>
+  <strong>Computer:</strong>
+  <%= @jyanken.computer %>
+</p>
+
+<p>
+  <strong>Judgment:</strong>
+  <%= @jyanken.judgment %>
+</p>
+
+<%= link_to 'Edit', edit_jyanken_path(@jyanken) %> |
+<%= link_to 'Back', jyankens_path %>

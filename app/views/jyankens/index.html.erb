@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Jyankens</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Human</th>
+      <th>Computer</th>
+      <th>Judgment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jyankens.each do |jyanken| %>
+      <tr>
+        <td><%= jyanken.human %></td>
+        <td><%= jyanken.computer %></td>
+        <td><%= jyanken.judgment %></td>
+        <td><%= link_to 'Show', jyanken %></td>
+        <td><%= link_to 'Edit', edit_jyanken_path(jyanken) %></td>
+        <td><%= link_to 'Destroy', jyanken, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Jyanken', new_jyanken_path %>

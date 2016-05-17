@@ -1,0 +1,29 @@
+<%= form_for(@jyanken) do |f| %>
+  <% if @jyanken.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jyanken.errors.count, "error") %> prohibited this jyanken from being saved:</h2>
+
+      <ul>
+      <% @jyanken.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :human %><br>
+    <%= f.number_field :human %>
+  </div>
+  <div class="field">
+    <%= f.label :computer %><br>
+    <%= f.number_field :computer %>
+  </div>
+  <div class="field">
+    <%= f.label :judgment %><br>
+    <%= f.number_field :judgment %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
