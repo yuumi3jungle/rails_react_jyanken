@@ -2,6 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import fetch from 'isomorphic-fetch'
 
+import 'material-design-lite/material.css'
+import 'material-design-lite/material.js'
+import '../css/style'
+
+
 class JyankeGamePage extends Component {
   constructor(props) {
     super(props)
@@ -54,11 +59,12 @@ class JyankenBox extends Component {
     this.props.action(te)
   }
   render() {
+    const buttonClass = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
     return (
-      <div>
-        <button onClick={this.onTeButton.bind(this, 0)}>グー</button>
-        <button onClick={this.onTeButton.bind(this, 1)}>チョキ</button>
-        <button onClick={this.onTeButton.bind(this, 2)}>パー</button>
+      <div className="jyanken-box">
+        <button onClick={this.onTeButton.bind(this, 0)} className={buttonClass}>グー</button>
+        <button onClick={this.onTeButton.bind(this, 1)} className={buttonClass}>チョキ</button>
+        <button onClick={this.onTeButton.bind(this, 2)} className={buttonClass}>パー</button>
       </div>
     )
   }
@@ -70,7 +76,7 @@ JyankenBox.propTypes = {
 class ScoreList extends Component {
   render() {
     return (
-      <table>
+      <table className="jyanken-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
             <td>時間</td><td>人間</td><td>コンピュータ</td><td>結果</td>
@@ -89,10 +95,11 @@ class ScoreListItem extends Component {
   render() {
     const teString = (te) => ["グー","チョキ", "パー"][te]
     const judgmentString = (judgment) => ["引き分け","勝ち", "負け"][judgment]
+    const rowColor = (judgment) => [null,"jyanken-win", "jyanken-lose"][judgment]
     const extractHHMM = (t) => t.substr(14, 5)
     return (
       <tbody>
-        <tr>
+        <tr className={rowColor(this.props.score.judgment)}>
           <td>{extractHHMM(this.props.score.created_at)}</td>
           <td>{teString(this.props.score.human)}</td>
           <td>{teString(this.props.score.computer)}</td>
