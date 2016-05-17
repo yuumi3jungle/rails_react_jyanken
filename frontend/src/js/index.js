@@ -19,10 +19,24 @@ class JyankeGamePage extends Component {
     })
     .catch((response) => console.log(response))
   }
+  fight(te) {
+    const data = JSON.stringify({jyanken: {human: te}})
+    fetch('/jyankens.json',
+      {method: 'POST',
+       headers: {'Content-Type': 'application/json'},
+       body: data})
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json)
+      this.getScores()
+    })
+    .catch((response) => console.log(response))
+  }
   render() {
     return (
       <div>
         <Header title="じゃんけん ポン！" />
+        <JyankenBox action={this.fight.bind(this)} />
         <ScoreList scores={this.state.scores} />
       </div>
     )
@@ -32,6 +46,25 @@ class JyankeGamePage extends Component {
 const Header = (props) => (<h1>{props.title}</h1>)
 Header.propTypes = {
   title: PropTypes.string
+}
+
+class JyankenBox extends Component {
+  onTeButton(te, event) {
+    event.preventDefault()
+    this.props.action(te)
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.onTeButton.bind(this, 0)}>グー</button>
+        <button onClick={this.onTeButton.bind(this, 1)}>チョキ</button>
+        <button onClick={this.onTeButton.bind(this, 2)}>パー</button>
+      </div>
+    )
+  }
+}
+JyankenBox.propTypes = {
+  action: PropTypes.func
 }
 
 class ScoreList extends Component {
