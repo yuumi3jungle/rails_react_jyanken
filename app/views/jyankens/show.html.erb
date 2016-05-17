@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Human:</strong>
-  <%= @jyanken.human %>
+  <strong>人間:</strong>
+  <%=  te_s(@jyanken.human) %>
 </p>
 
 <p>
-  <strong>Computer:</strong>
-  <%= @jyanken.computer %>
+  <strong>コンピュータ:</strong>
+  <%= te_s(@jyanken.computer) %>
 </p>
 
 <p>
-  <strong>Judgment:</strong>
-  <%= @jyanken.judgment %>
+  <strong>勝敗:</strong>
+  <%= judgment_s(@jyanken.judgment) %>
 </p>
 
-<%= link_to 'Edit', edit_jyanken_path(@jyanken) %> |
-<%= link_to 'Back', jyankens_path %>
+<%= link_to '戻る', jyankens_path %>

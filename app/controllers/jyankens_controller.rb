@@ -4,7 +4,7 @@ class JyankensController < ApplicationController
   # GET /jyankens
   # GET /jyankens.json
   def index
-    @jyankens = Jyanken.all
+    @jyankens = Jyanken.order(id: :desc).first(10)
   end
 
   # GET /jyankens/1
@@ -59,6 +59,10 @@ class JyankensController < ApplicationController
       format.html { redirect_to jyankens_url, notice: 'Jyanken was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def status
+    @status = Jyanken.status
   end
 
   private

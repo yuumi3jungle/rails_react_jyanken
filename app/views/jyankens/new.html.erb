@@ -1,5 +1,14 @@
-<h1>New Jyanken</h1>
+<h1>ジャンケン</h1>
 
-<%= render 'form' %>
+<%= form_for(@jyanken) do |f| %>
+  <div class="field">
+    <%= f.label :human %><br>
+    <%= f.select :human, Jyanken::TE.map {|value, te| [te, value]} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "ポイ！" %>
+  </div>
+<% end %>
 
-<%= link_to 'Back', jyankens_path %>
+
+<%= link_to '戻る', jyankens_path %>

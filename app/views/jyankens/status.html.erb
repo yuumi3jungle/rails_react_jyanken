@@ -1,0 +1,16 @@
+<p>
+  <strong>人間の勝ち:</strong>
+  <%=  @status[1] %>
+</p>
+
+<p>
+  <strong>コンピュータの勝ち:</strong>
+  <%= @status[2] %>
+</p>
+
+<p>
+  <strong>引き分け:</strong>
+  <%= @status[0] %>
+</p>
+
+<%= link_to '戻る', jyankens_path %>

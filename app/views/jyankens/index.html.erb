@@ -1,26 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Jyankens</h1>
+<h1>ジャンケンの結果</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Human</th>
-      <th>Computer</th>
-      <th>Judgment</th>
-      <th colspan="3"></th>
+      <th>時間</th>
+      <th>人間の手</th>
+      <th>コンピュターの手</th>
+      <th>判定</th>
     </tr>
   </thead>
 
   <tbody>
     <% @jyankens.each do |jyanken| %>
       <tr>
-        <td><%= jyanken.human %></td>
-        <td><%= jyanken.computer %></td>
-        <td><%= jyanken.judgment %></td>
-        <td><%= link_to 'Show', jyanken %></td>
-        <td><%= link_to 'Edit', edit_jyanken_path(jyanken) %></td>
-        <td><%= link_to 'Destroy', jyanken, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= jyanken.created_at.to_s(:time)  %></td>
+        <td><%= te_s(jyanken.human) %></td>
+        <td><%= te_s(jyanken.computer) %></td>
+        <td><%= judgment_s(jyanken.judgment) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +24,5 @@
 
 <br>
 
-<%= link_to 'New Jyanken', new_jyanken_path %>
+<%= link_to 'ジャンケン', new_jyanken_path %> |
+<%= link_to '勝敗', status_jyankens_path %>

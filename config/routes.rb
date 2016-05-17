@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :jyankens
+  resources :jyankens do
+    collection { get :status }
+  end
+
+  root 'jyankens#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
