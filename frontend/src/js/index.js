@@ -10,7 +10,7 @@ import '../css/style'
 class JyankeGamePage extends Component {
   constructor(props) {
     super(props)
-    this.state = {scores: []}
+    this.state = {scores: [], status: {}}
   }
   componentDidMount() {
     this.getScores()
@@ -21,6 +21,16 @@ class JyankeGamePage extends Component {
     .then((json) => {
       console.log(json)
       this.setState({scores: json})
+      this.getStatus()
+    })
+    .catch((response) => console.log(response))
+  }
+  getStatus() {
+    fetch('/jyankens/status.json')
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json)
+      this.setState({status: json})
     })
     .catch((response) => console.log(response))
   }
@@ -43,6 +53,7 @@ class JyankeGamePage extends Component {
         <Header title="じゃんけん ポン！" />
         <JyankenBox action={this.fight.bind(this)} />
         <ScoreList scores={this.state.scores} />
+        <StatusBox status={this.state.status} />
       </div>
     )
   }
@@ -112,6 +123,26 @@ class ScoreListItem extends Component {
 ScoreListItem.propTypes = {
   score: PropTypes.object
 }
+
+const StatusBox = (props) => (
+  <table className="jyanken-status mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <tbody>
+      <tr>
+        <th>勝ち</th><td className="jyanken-win">{props.status['win']}</td>
+      </tr>
+      <tr>
+        <th>負け</th><td className="jyanken-lose">{props.status['lose']}</td>
+      </tr>
+      <tr>
+        <th>引き分け</th><td>{props.status['draw']}</td>
+      </tr>
+    </tbody>
+  </table>)
+
+StatusBox.propTypes = {
+  status: PropTypes.object
+}
+
 
 ReactDOM.render(
   <JyankeGamePage />,
