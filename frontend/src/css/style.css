@@ -6,10 +6,11 @@ div#example {
 
 .jyanken-box { margin: 40px auto; }
 .jyanken-box button { margin: 0 20px; }
-.jyanken-table { margin: 0 auto;  }
+.jyanken-table { margin: 20px auto;  }
 .jyanken-win { background-color: #82B1FF; }
 .jyanken-lose { background-color: #FF8A80; }
 
 .jyanken-status { width: 360px; margin: 20px auto; }
 .jyanken-status td { font-size: 150%; }
 .jyanken-status th { font-size: 120%; }
+.jyanken-tab { width: 360px; margin: 20px auto; }

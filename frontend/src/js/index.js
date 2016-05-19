@@ -10,7 +10,7 @@ import '../css/style'
 class JyankeGamePage extends Component {
   constructor(props) {
     super(props)
-    this.state = {scores: [], status: {}}
+    this.state = {scores: [], status: {}, tabIndex: 0}
   }
   componentDidMount() {
     this.getScores()
@@ -47,16 +47,55 @@ class JyankeGamePage extends Component {
     })
     .catch((response) => console.log(response))
   }
+  tabChange(ix) {
+    this.setState({tabIndex: ix}, this.getResult)
+  }
   render() {
     return (
       <div>
         <Header title="じゃんけん ポン！" />
         <JyankenBox action={this.fight.bind(this)} />
-        <ScoreList scores={this.state.scores} />
-        <StatusBox status={this.state.status} />
+        <ResultTab titles='対戦結果,対戦成績' index={this.state.tabIndex} actionTab={this.tabChange.bind(this)}>
+          <ScoreList scores={this.state.scores} />
+          <StatusBox status={this.state.status} />
+        </ResultTab>
       </div>
     )
   }
+}
+
+
+class ResultTab extends Component {
+  tabChange(ix, event) {
+    event.preventDefault()
+    this.props.actionTab(ix)
+  }
+  render() {
+    const titles = this.props.titles.split(',')
+    const isActive = (ix) => this.props.index == ix ? "is-active" : ""
+    return (
+      <div className="jyanken-tab mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <div className="mdl-tabs__tab-bar">
+          {titles.map((title, ix) => (
+            <a key={ix} onClick={this.tabChange.bind(this, ix)} href="#scores-panel" className={`mdl-tabs__tab ${isActive(ix)}`}>
+              {title}
+            </a>
+            ))}
+        </div>
+        {titles.map((title, ix) => (
+          <div key={ix} className={`mdl-tabs__panel ${isActive(ix)}`} id="scores-panel">
+            {this.props.children[ix]}
+          </div>
+        ))}
+      </div>
+    )
+  }
+}
+ResultTab.propTypes = {
+  children: PropTypes.array,
+  titles: PropTypes.string,
+  index: PropTypes.number,
+  actionTab: PropTypes.func
 }
 
 const Header = (props) => (<h1>{props.title}</h1>)
