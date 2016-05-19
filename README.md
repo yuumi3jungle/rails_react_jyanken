@@ -6,6 +6,8 @@
 
 * Ruby on Rails backend
 * React.js frontend
+* Redux container
+	* Redux Thunk middleware 
 * Material Design Lite CSS/JS
 
 ## Requirements
